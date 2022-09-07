@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bosenet.webflux.dto.EmployeeDto;
+import com.bosenet.webflux.dto.LocationResponseDto;
 import com.bosenet.webflux.service.EmployeeService;
 
 import reactor.core.publisher.Flux;
@@ -28,6 +29,10 @@ public class EmployeeController {
 	@GetMapping(value="greater-age/{age}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<EmployeeDto> getEmployeesGreaterThanAge(@PathVariable int age){
 		return service.getEmployeeAboveAge(age);
+	}
+	@GetMapping(value="location-greater-age/{age}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public Flux<LocationResponseDto> getLocationOfEmployeesGreaterThanAge(@PathVariable int age){
+		return service.getLocationOfEmployeesAboveAge(age);
 	}
 	
 	@GetMapping(value="at-location/{location}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)

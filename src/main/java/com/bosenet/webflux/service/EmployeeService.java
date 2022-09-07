@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bosenet.webflux.dto.EmployeeDto;
+import com.bosenet.webflux.dto.LocationResponseDto;
 import com.bosenet.webflux.repository.EmployeeRepository;
 
 import reactor.core.publisher.Flux;
@@ -24,6 +25,11 @@ public class EmployeeService {
 	}
 	public Flux<EmployeeDto> getEmployeeByLocation(String location){
 		return repository.genrateData().filter(employee -> employee.getLocation().equalsIgnoreCase(location));
+	}
+	public Flux<LocationResponseDto> getLocationOfEmployeesAboveAge(int age){
+		return repository.genrateData()
+				.filter(emp->emp.getAge()>=age)
+				.map(emp->new LocationResponseDto(emp.getEmpId(),emp.getLocation()));
 	}
 	
 	public Mono<EmployeeDto> getEmployeeById(Long id){
