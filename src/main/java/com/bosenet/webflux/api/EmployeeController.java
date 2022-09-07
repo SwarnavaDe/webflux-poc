@@ -11,6 +11,7 @@ import com.bosenet.webflux.dto.EmployeeDto;
 import com.bosenet.webflux.service.EmployeeService;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/employee")
@@ -32,5 +33,10 @@ public class EmployeeController {
 	@GetMapping(value="at-location/{location}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<EmployeeDto> getEmployeesAtLocation(@PathVariable String location){
 		return service.getEmployeeByLocation(location);
+	}
+	
+	@GetMapping("id/{id}")
+	public Mono<EmployeeDto> getEmployeeById(@PathVariable Long id){
+		return service.getEmployeeById(id);
 	}
 }
