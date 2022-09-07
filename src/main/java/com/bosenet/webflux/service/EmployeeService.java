@@ -19,7 +19,9 @@ public class EmployeeService {
 		return repository.genrateData();
 	}
 	public Flux<EmployeeDto> getEmployeeAboveAge(int age){
-		return repository.genrateData()
-						 .filter(employee -> employee.getAge()>=age);
+		return repository.genrateData().filter(employee -> employee.getAge()>=age);
+	}
+	public Flux<EmployeeDto> getEmployeeByLocation(String location){
+		return repository.genrateData().filter(employee -> employee.getLocation().equalsIgnoreCase(location));
 	}
 }
