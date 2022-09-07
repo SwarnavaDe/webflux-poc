@@ -18,5 +18,8 @@ public class EmployeeService {
 	public Flux<EmployeeDto> getAllEmployees(){
 		return repository.genrateData();
 	}
-	
+	public Flux<EmployeeDto> getEmployeeAboveAge(int age){
+		return repository.genrateData()
+						 .filter(employee -> employee.getAge()>=age);
+	}
 }
